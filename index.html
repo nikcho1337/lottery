@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <title>ЛОТАРИЯ БЪЛГАРИЯ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #1b1b1b, #3e0a45);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    header {
+      background: radial-gradient(circle at center, #1c1c1c 0%, #0d000e 100%);
+      padding: 6rem 1rem 4rem;
+      position: relative;
+      text-align: center;
+      box-shadow: inset 0 -60px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      font-weight: 700;
+      color: #ffe600;
+      text-shadow: 4px 4px 12px rgba(0,0,0,0.8);
+      margin: 0;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      0% { text-shadow: 3px 3px 12px rgba(0,0,0,0.6); transform: scale(1); }
+      100% { text-shadow: 4px 4px 20px rgba(255,255,255,0.7); transform: scale(1.03); }
+    }
+    header p {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-top: 1rem;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+    }
+    header::after {
+      content: url('https://flagcdn.com/w40/bg.png');
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+    .ticket {
+      position: absolute;
+      font-size: 2.5rem;
+      opacity: 0.3;
+      animation: floatFast 1s ease-in-out infinite;
+    }
+    .ticket.left {
+      top: 20%;
+      left: 5%;
+    }
+    .ticket.right {
+      top: 25%;
+      right: 5%;
+      animation-delay: 0.5s;
+    }
+    @keyframes floatFast {
+      0% { transform: translateY(0px) rotate(-15deg); }
+      50% { transform: translateY(-15px) rotate(15deg); }
+      100% { transform: translateY(0px) rotate(-15deg); }
+    }
+    .star {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: yellow;
+      border-radius: 50%;
+      animation: fallStars 2.5s linear infinite;
+      opacity: 0.7;
+    }
+    @keyframes fallStars {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+    .hero {
+      padding: 5rem 2rem;
+      background-color: #8457eb;
+      background-image: radial-gradient(#a783ff 1px, transparent 1px);
+      background-size: 30px 30px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease forwards;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+    .cta {
+      display: inline-block;
+      background-color: #ffcc00;
+      color: #000;
+      padding: 1rem 2.5rem;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      animation: pulse 1s infinite;
+    }
+    .cta:hover {
+      transform: scale(1.05);
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,204,0,0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(255,204,0,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,204,0,0); }
+    }
+    .jackpot-box {
+      background: #fff;
+      color: #222;
+      padding: 2rem;
+      border-radius: 1rem;
+      display: inline-block;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      animation: floatUpFast 1s ease-in-out infinite alternate;
+    }
+    .jackpot-box strong {
+      font-size: 2.5rem;
+      color: #f2a900;
+    }
+    .numbers {
+      display: none;
+    }
+    .ball {
+      display: inline-block;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #fff;
+      margin: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      animation: floatUpFast 1s ease-in-out infinite alternate;
+    }
+    .ball:nth-child(1) { background: #cc33cc; }
+    .ball:nth-child(2) { background: #9966ff; }
+    .ball:nth-child(3) { background: #33ccff; }
+    .ball:nth-child(4) { background: #33cc99; }
+    .ball:nth-child(5) { background: #99cc33; }
+    .ball:nth-child(6) { background: #ffcc33; }
+    .round-section {
+      max-width: 850px;
+      margin: 4rem auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      color: #222;
+    }
+    .round-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .round-header h2 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .round-meta {
+      font-weight: 600;
+      color: #555;
+      font-size: 1rem;
+    }
+    .ball-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .details-link {
+      color: #6b45d6;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    footer {
+      background: #120026;
+      color: #ccc;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    @keyframes floatUpFast {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-15px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="ticket left">🎟️</div>
+    <div class="ticket right">🎟️</div>
+    <h1>ЛОТАРИЯ БЪЛГАРИЯ</h1>
+    <p>Официална платформа за онлайн участие</p>
+    <!-- Звездички -->
+    <script>
+      for(let i = 0; i < 30; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = '-' + (Math.random() * 100) + 'px';
+        star.style.animationDelay = (Math.random() * 3) + 's';
+        star.style.width = star.style.height = (Math.random() * 4 + 2) + 'px';
+        document.body.appendChild(star);
+      }
+    </script>
+  </header>
+
+  <section class="hero">
+    <h2>Големи печалби те очакват!</h2>
+    <p>Всеки билет ти дава шанс за златен джакпот. Не изпускай момента.</p>
+    <a class="cta" href="#">Купи Билет</a>
+    <div class="jackpot-box">
+      <div><strong>15,632 лв</strong></div>
+      <div>4ч 45м 22с до теглене</div>
+    </div>
+  </section>
+
+  <section class="round-section">
+    <div class="round-header">
+      <h2>Рунд №1628</h2>
+      <div class="round-meta">Изтеглен на 16 май 2025, 15:00</div>
+    </div>
+    <h3>Печеливши Числа</h3>
+    <div class="ball-row">
+      <div class="ball">8</div>
+      <div class="ball">8</div>
+      <div class="ball">9</div>
+      <div class="ball">4</div>
+      <div class="ball">2</div>
+      <div class="ball">6</div>
+    </div>
+    <a class="details-link" href="#">Детайли ▼</a>
+  </section>
+
+  <footer>
+    © 2025 Лотария България — Всички права запазени.
+  </footer>
+</body>
+</html>
